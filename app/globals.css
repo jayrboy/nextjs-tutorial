@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* just an example, will remove */
+body {
+  background: gainsboro;
+}
