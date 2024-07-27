@@ -9,26 +9,29 @@ type User = {
   lastName: string;
 };
 
-export const createUser = async (formData: FormData) => {
+export const createUser = async (prevState: any, formData: FormData) => {
   'use server';
+  console.log(prevState);
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   const firstName = formData.get('firstName') as string;
   const lastName = formData.get('lastName') as string;
-  //   console.log({ firstName, lastName });
+  const newUser: User = { firstName, lastName, id: Date.now().toString() };
 
   //   const rawData = Object.fromEntries(formData);
   //   console.log(rawData);
-
-  const newUser: User = { firstName, lastName, id: Date.now().toString() };
-
+  //   console.log({ firstName, lastName });
   try {
     await saveUser(newUser);
     //  some logic
+    revalidatePath('/actions');
+    // redirect('/');
+
+    return 'user created successfully...';
   } catch (error) {
     console.log(error);
+    return 'failed to create user...';
   }
-  redirect('/');
-  
-  // revalidatePath('/actions');
 };
 
 export const fetchUsers = async (): Promise<User[]> => {
