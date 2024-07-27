@@ -1,5 +1,5 @@
 import './globals.css';
-import Navbar from './components/Navbar';
+import Navbar from '../components/Navbar';
 import type { Metadata } from 'next';
 import { Inter, Inconsolata, Roboto } from 'next/font/google';
 
